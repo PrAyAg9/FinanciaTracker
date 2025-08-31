@@ -1,0 +1,31 @@
+{
+  "name": "finance-dashboard-root",
+  "version": "1.0.0",
+  "description": "Finance Dashboard - Root package for managing both frontend and backend",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "test": "echo \"No tests specified yet\"",
+    "setup": "npm run install:all && echo \"Setup complete! Check the README.md for next steps.\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "finance",
+    "dashboard",
+    "react",
+    "nodejs",
+    "mongodb",
+    "oauth"
+  ],
+  "author": "",
+  "license": "MIT"
+}
