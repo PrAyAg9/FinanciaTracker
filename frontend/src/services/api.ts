@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "financia-tracker-backend.vercel.app",
+  baseURL: import.meta.env.VITE_API_URL || "https://financiatrackerbackend.onrender.com",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
