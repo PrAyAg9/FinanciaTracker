@@ -74,8 +74,8 @@ const TrendsChart: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Income vs Expenses Trend</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Income vs Expenses Trend</h3>
         <div className="flex items-center justify-center py-12">
           <Loader className="w-6 h-6 animate-spin text-blue-600" />
         </div>
@@ -85,9 +85,9 @@ const TrendsChart: React.FC = () => {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Income vs Expenses Trend</h3>
-        <div className="flex items-center justify-center py-12 text-gray-500">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Income vs Expenses Trend</h3>
+        <div className="flex items-center justify-center py-12 text-gray-500 dark:text-gray-400">
           No trend data available
         </div>
       </div>
@@ -97,8 +97,8 @@ const TrendsChart: React.FC = () => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-4 rounded-lg shadow-lg border">
-          <p className="font-medium text-gray-900 mb-2">{label}</p>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600">
+          <p className="font-medium text-gray-900 dark:text-white mb-2">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: ${entry.value.toLocaleString()}
@@ -111,9 +111,9 @@ const TrendsChart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">Financial Trends</h3>
-      <p className="text-gray-600 text-sm mb-6">Income vs Expenses over time</p>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Financial Trends</h3>
+      <p className="text-gray-600 dark:text-gray-300 text-sm mb-6">Income vs Expenses over time</p>
       
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">

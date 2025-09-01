@@ -75,8 +75,8 @@ const SpendingChart: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Spending by Category</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Spending by Category</h3>
         <div className="flex items-center justify-center py-12">
           <Loader className="w-6 h-6 animate-spin text-blue-600" />
         </div>
@@ -86,9 +86,9 @@ const SpendingChart: React.FC = () => {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Spending by Category</h3>
-        <div className="flex items-center justify-center py-12 text-gray-500">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Spending by Category</h3>
+        <div className="flex items-center justify-center py-12 text-gray-500 dark:text-gray-400">
           No spending data available
         </div>
       </div>
@@ -131,9 +131,9 @@ const SpendingChart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">Spending by Category</h3>
-      <p className="text-gray-600 text-sm mb-6">Current month breakdown</p>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Spending by Category</h3>
+      <p className="text-gray-600 dark:text-gray-300 text-sm mb-6">Current month breakdown</p>
       
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
@@ -168,7 +168,7 @@ const SpendingChart: React.FC = () => {
               className="w-3 h-3 rounded-full flex-shrink-0"
               style={{ backgroundColor: item.color }}
             />
-            <span className="text-sm text-gray-700 truncate">{item.name}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300 truncate">{item.name}</span>
           </div>
         ))}
       </div>

@@ -106,32 +106,32 @@ const TransactionList: React.FC<TransactionListProps> = ({ filters, refreshTrigg
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-100">
+      <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             All Transactions ({filteredTransactions.length})
           </h2>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
             Showing {filteredTransactions.length} of {transactions.length} transactions
           </div>
         </div>
       </div>
 
       {/* Transaction List */}
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y divide-gray-100 dark:divide-gray-700">
         {filteredTransactions.map((transaction) => (
           <div
             key={transaction.id}
-            className="px-6 py-4 hover:bg-gray-50 transition-colors duration-200"
+            className="px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                   transaction.type === 'income' 
-                    ? 'bg-green-100 text-green-600' 
-                    : 'bg-red-100 text-red-600'
+                    ? 'bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400' 
+                    : 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400'
                 }`}>
                   {transaction.type === 'income' ? (
                     <TrendingUp className="w-6 h-6" />
@@ -140,9 +140,9 @@ const TransactionList: React.FC<TransactionListProps> = ({ filters, refreshTrigg
                   )}
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 text-lg">{transaction.description}</h4>
-                  <div className="flex items-center space-x-3 text-sm text-gray-500 mt-1">
-                    <span className="px-2 py-1 bg-gray-100 rounded-full text-xs font-medium">
+                  <h4 className="font-medium text-gray-900 dark:text-white text-lg">{transaction.description}</h4>
+                  <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-xs font-medium">
                       {transaction.category}
                     </span>
                     <span>{transaction.date}</span>
@@ -152,7 +152,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ filters, refreshTrigg
               
               <div className="flex items-center space-x-4">
                 <span className={`text-xl font-bold ${
-                  transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                  transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                 }`}>
                   {transaction.type === 'income' ? '+' : ''}${Math.abs(transaction.amount).toLocaleString()}
                 </span>
@@ -160,13 +160,13 @@ const TransactionList: React.FC<TransactionListProps> = ({ filters, refreshTrigg
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => onEdit(transaction)}
-                    className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+                    className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors duration-200"
                   >
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(transaction.id)}
-                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                    className="p-2 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition-colors duration-200"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -179,23 +179,23 @@ const TransactionList: React.FC<TransactionListProps> = ({ filters, refreshTrigg
 
       {filteredTransactions.length === 0 && (
         <div className="px-6 py-12 text-center">
-          <p className="text-gray-500 text-lg">No transactions found matching your filters.</p>
-          <p className="text-gray-400 text-sm mt-2">Try adjusting your search criteria or date range.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">No transactions found matching your filters.</p>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">Try adjusting your search criteria or date range.</p>
         </div>
       )}
 
       {/* Pagination would go here in a real app */}
       {filteredTransactions.length > 0 && (
-        <div className="px-6 py-4 border-t border-gray-100 bg-gray-50">
+        <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Showing 1-{filteredTransactions.length} of {filteredTransactions.length} results
             </p>
             <div className="flex space-x-2">
-              <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50" disabled>
+              <button className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50" disabled>
                 Previous
               </button>
-              <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50" disabled>
+              <button className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 disabled:opacity-50" disabled>
                 Next
               </button>
             </div>

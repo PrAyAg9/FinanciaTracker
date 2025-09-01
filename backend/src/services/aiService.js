@@ -67,14 +67,38 @@ export const parseTransactionWithAI = async (text) => {
 
     const prompt = `Parse this transaction text into JSON. Return ONLY valid JSON, no other text.
 
-Categories: ${COMMON_CATEGORIES.join(", ")}
-Text: "${text}"
+Available Categories (choose the MOST appropriate one):
+- Food & Dining: restaurants, fast food, cafes, food delivery, dining out
+- Gas & Fuel: gas stations, fuel, petrol, diesel
+- Groceries: supermarkets, grocery stores, food shopping
+- Shopping: retail, clothing, electronics, online shopping, Amazon
+- Entertainment: movies, games, subscriptions, streaming, concerts
+- Bills & Utilities: electricity, water, internet, phone, utilities
+- Travel: hotels, flights, transportation, vacation
+- Healthcare: medical, pharmacy, doctor, hospital
+- Education: courses, books, tuition, training
+- Transportation: taxi, uber, bus, train, public transport
+- Salary: salary, wages, paycheck
+- Freelance: freelance work, consulting, side income
+- Investment: dividends, returns, investment income
+- Business: business income, sales
+- Gift: gifts received, presents
+- Other: anything that doesn't fit above categories
 
-Format:
+Text to parse: "${text}"
+
+Examples:
+- "Lunch at McDonald's $12.50" → category: "Food & Dining"
+- "Gas station $45" → category: "Gas & Fuel"  
+- "Netflix subscription $15" → category: "Entertainment"
+- "Grocery shopping $85" → category: "Groceries"
+- "Uber ride $25" → category: "Transportation"
+
+Return JSON format:
 {
   "amount": number,
   "description": "string", 
-  "category": "string",
+  "category": "exact category from list above",
   "type": "income" or "expense",
   "date": "YYYY-MM-DD"
 }`;
@@ -107,12 +131,34 @@ Format:
  * Enhance transaction with validation
  */
 const enhanceTransaction = (transaction, originalText) => {
+  // Validate and correct category
+  let validCategory = "Other";
+  if (transaction.category && COMMON_CATEGORIES.includes(transaction.category)) {
+    validCategory = transaction.category;
+  } else {
+    // Try to find a close match (case insensitive)
+    const lowerCategory = transaction.category?.toLowerCase();
+    const match = COMMON_CATEGORIES.find(cat => 
+      cat.toLowerCase() === lowerCategory || 
+      cat.toLowerCase().includes(lowerCategory) ||
+      lowerCategory?.includes(cat.toLowerCase())
+    );
+    if (match) {
+      validCategory = match;
+    } else {
+      console.log(`⚠️ Category "${transaction.category}" not found, using fallback parsing`);
+      // Use fallback parsing for better category detection
+      const fallback = simpleParseTransaction(originalText);
+      validCategory = fallback.category;
+    }
+  }
+
+  console.log(`📝 Transaction parsed: "${originalText}" → Category: "${validCategory}"`);
+
   return {
     amount: Math.abs(parseFloat(transaction.amount)) || 0,
     description: transaction.description || originalText.substring(0, 100),
-    category: COMMON_CATEGORIES.includes(transaction.category)
-      ? transaction.category
-      : "Other",
+    category: validCategory,
     type: ["income", "expense"].includes(transaction.type)
       ? transaction.type
       : "expense",
@@ -123,23 +169,48 @@ const enhanceTransaction = (transaction, originalText) => {
 };
 
 /**
- * Simple fallback parsing
+ * Simple fallback parsing with basic category detection
  */
 const simpleParseTransaction = (text) => {
   const amountMatch = text.match(/[\$₹€£¥]?(\d+(?:\.\d{2})?)/);
   const amount = amountMatch ? parseFloat(amountMatch[1]) : 0;
 
-  const incomeKeywords = ["salary", "income", "received", "deposit", "bonus"];
+  const lowerText = text.toLowerCase();
+  
+  // Income detection
+  const incomeKeywords = ["salary", "income", "received", "deposit", "bonus", "wage", "paycheck", "freelance"];
   const type = incomeKeywords.some((keyword) =>
-    text.toLowerCase().includes(keyword)
-  )
-    ? "income"
-    : "expense";
+    lowerText.includes(keyword)
+  ) ? "income" : "expense";
+
+  // Category detection based on keywords
+  let category = "Other";
+  
+  const categoryKeywords = {
+    "Food & Dining": ["restaurant", "dining", "food", "lunch", "dinner", "breakfast", "cafe", "coffee", "pizza", "burger", "mcdonald", "kfc", "subway", "starbucks", "domino", "delivery"],
+    "Gas & Fuel": ["gas", "fuel", "petrol", "diesel", "shell", "bp", "exxon", "chevron", "station"],
+    "Groceries": ["grocery", "supermarket", "walmart", "target", "costco", "kroger", "safeway", "market", "food shopping"],
+    "Shopping": ["amazon", "shopping", "store", "retail", "clothing", "electronics", "mall", "online", "purchase"],
+    "Entertainment": ["movie", "netflix", "spotify", "gaming", "steam", "entertainment", "subscription", "streaming", "concert", "theater"],
+    "Bills & Utilities": ["electric", "electricity", "water", "internet", "phone", "utility", "bill", "cable", "mobile"],
+    "Travel": ["hotel", "flight", "airplane", "vacation", "travel", "booking", "airbnb", "uber", "taxi"],
+    "Transportation": ["uber", "taxi", "bus", "train", "metro", "transport", "parking", "toll"],
+    "Healthcare": ["doctor", "medical", "pharmacy", "hospital", "health", "medicine", "clinic"],
+    "Education": ["course", "education", "book", "tuition", "school", "university", "training"]
+  };
+
+  // Find the best matching category
+  for (const [cat, keywords] of Object.entries(categoryKeywords)) {
+    if (keywords.some(keyword => lowerText.includes(keyword))) {
+      category = cat;
+      break;
+    }
+  }
 
   return {
     amount,
     description: text.substring(0, 100),
-    category: "Other",
+    category,
     type,
     date: new Date().toISOString().split("T")[0],
   };

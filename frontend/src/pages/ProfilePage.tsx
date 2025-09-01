@@ -51,50 +51,50 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <Header />
       
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Profile & Settings</h1>
-          <p className="text-gray-600 mt-2">Manage your account and preferences</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile & Settings</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">Manage your account and preferences</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Profile Info */}
           <div className="lg:col-span-2 space-y-6">
             {/* Basic Info */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <User className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-semibold text-gray-900">Profile Information</h2>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Profile Information</h2>
               </div>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
                   <input
                     type="text"
                     value={user?.name || ''}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     readOnly
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
                   <input
                     type="email"
                     value={user?.email || ''}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     readOnly
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Member Since</label>
-                  <div className="flex items-center space-x-2 text-gray-600">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Member Since</label>
+                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                     <Calendar className="w-4 h-4" />
                     <span>August 2025</span>
                   </div>
@@ -103,22 +103,22 @@ const ProfilePage: React.FC = () => {
             </div>
 
             {/* Notification Settings */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <Bell className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-semibold text-gray-900">Notification Preferences</h2>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Notification Preferences</h2>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">Email Notifications</h3>
-                    <p className="text-sm text-gray-600">Receive transaction alerts via email</p>
+                    <h3 className="font-medium text-gray-900 dark:text-white">Email Notifications</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Receive transaction alerts via email</p>
                   </div>
                   <button
                     onClick={() => handleNotificationChange('email')}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-                      notifications.email ? 'bg-blue-600' : 'bg-gray-200'
+                      notifications.email ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}
                   >
                     <span
@@ -131,13 +131,13 @@ const ProfilePage: React.FC = () => {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">Push Notifications</h3>
-                    <p className="text-sm text-gray-600">Get instant alerts on your device</p>
+                    <h3 className="font-medium text-gray-900 dark:text-white">Push Notifications</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Get instant alerts on your device</p>
                   </div>
                   <button
                     onClick={() => handleNotificationChange('push')}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-                      notifications.push ? 'bg-blue-600' : 'bg-gray-200'
+                      notifications.push ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}
                   >
                     <span
@@ -150,13 +150,13 @@ const ProfilePage: React.FC = () => {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">Weekly Summary</h3>
-                    <p className="text-sm text-gray-600">Weekly spending summary emails</p>
+                    <h3 className="font-medium text-gray-900 dark:text-white">Weekly Summary</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Weekly spending summary emails</p>
                   </div>
                   <button
                     onClick={() => handleNotificationChange('weekly')}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-                      notifications.weekly ? 'bg-blue-600' : 'bg-gray-200'
+                      notifications.weekly ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}
                   >
                     <span
@@ -169,13 +169,13 @@ const ProfilePage: React.FC = () => {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">Monthly Report</h3>
-                    <p className="text-sm text-gray-600">Detailed monthly financial reports</p>
+                    <h3 className="font-medium text-gray-900 dark:text-white">Monthly Report</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Detailed monthly financial reports</p>
                   </div>
                   <button
                     onClick={() => handleNotificationChange('monthly')}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-                      notifications.monthly ? 'bg-blue-600' : 'bg-gray-200'
+                      notifications.monthly ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}
                   >
                     <span
@@ -189,39 +189,39 @@ const ProfilePage: React.FC = () => {
             </div>
 
             {/* Data & Privacy */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <Shield className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-semibold text-gray-900">Data & Privacy</h2>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Data & Privacy</h2>
               </div>
               
               <div className="space-y-4">
                 <button
                   onClick={handleExportData}
-                  className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-3">
-                    <Download className="w-5 h-5 text-gray-600" />
+                    <Download className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                     <div className="text-left">
-                      <h3 className="font-medium text-gray-900">Export Your Data</h3>
-                      <p className="text-sm text-gray-600">Download all your transaction data</p>
+                      <h3 className="font-medium text-gray-900 dark:text-white">Export Your Data</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Download all your transaction data</p>
                     </div>
                   </div>
-                  <span className="text-blue-600 font-medium">Export</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-medium">Export</span>
                 </button>
                 
                 <button
                   onClick={handleDeleteAccount}
-                  className="w-full flex items-center justify-between p-4 border border-red-200 rounded-lg hover:bg-red-50 transition-colors duration-200"
+                  className="w-full flex items-center justify-between p-4 border border-red-200 dark:border-red-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-3">
                     <Shield className="w-5 h-5 text-red-600" />
                     <div className="text-left">
-                      <h3 className="font-medium text-red-900">Delete Account</h3>
-                      <p className="text-sm text-red-600">Permanently delete your account and data</p>
+                      <h3 className="font-medium text-red-900 dark:text-red-400">Delete Account</h3>
+                      <p className="text-sm text-red-600 dark:text-red-400">Permanently delete your account and data</p>
                     </div>
                   </div>
-                  <span className="text-red-600 font-medium">Delete</span>
+                  <span className="text-red-600 dark:text-red-400 font-medium">Delete</span>
                 </button>
               </div>
             </div>
@@ -229,24 +229,24 @@ const ProfilePage: React.FC = () => {
 
           {/* Profile Card */}
           <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white text-2xl font-bold">
                     {user?.name?.charAt(0) || 'D'}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">{user?.name}</h3>
-                <p className="text-gray-600 mb-4">{user?.email}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">{user?.name}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{user?.email}</p>
                 
-                <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 mb-6">
+                <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-6">
                   <Mail className="w-4 h-4" />
                   <span>Verified Account</span>
                 </div>
                 
                 <button
                   onClick={logout}
-                  className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+                  className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200 font-medium"
                 >
                   Sign Out
                 </button>
@@ -254,42 +254,42 @@ const ProfilePage: React.FC = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Summary</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Account Summary</h3>
               {statsLoading ? (
                 <div className="flex items-center justify-center py-8">
                   <Loader className="w-6 h-6 animate-spin text-blue-600" />
-                  <span className="ml-2 text-gray-600">Loading stats...</span>
+                  <span className="ml-2 text-gray-600 dark:text-gray-400">Loading stats...</span>
                 </div>
               ) : stats ? (
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Total Transactions</span>
-                    <span className="font-semibold text-gray-900">{stats.totalTransactions}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Total Transactions</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{stats.totalTransactions}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Categories Used</span>
-                    <span className="font-semibold text-gray-900">{stats.categoriesUsed}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Categories Used</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{stats.categoriesUsed}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Total Income</span>
-                    <span className="font-semibold text-green-600">${stats.totalIncome.toLocaleString()}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Total Income</span>
+                    <span className="font-semibold text-green-600 dark:text-green-400">${stats.totalIncome.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Total Expenses</span>
-                    <span className="font-semibold text-red-600">${stats.totalExpenses.toLocaleString()}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Total Expenses</span>
+                    <span className="font-semibold text-red-600 dark:text-red-400">${stats.totalExpenses.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Most Used Category</span>
-                    <span className="font-semibold text-gray-900">{stats.mostUsedCategory}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Most Used Category</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{stats.mostUsedCategory}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Account Age</span>
-                    <span className="font-semibold text-gray-900">{stats.accountAge}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Account Age</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{stats.accountAge}</span>
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-4 text-gray-500">
+                <div className="text-center py-4 text-gray-500 dark:text-gray-400">
                   Unable to load statistics
                 </div>
               )}
